@@ -55,6 +55,7 @@ public class UserService implements UserServiceRemote, UserServiceLocal {
 		return qry.getResultList();
 	}
 
+	
 	@Override
 	public User findById(Integer idUser) {
 		return em.find(User.class, idUser);		
