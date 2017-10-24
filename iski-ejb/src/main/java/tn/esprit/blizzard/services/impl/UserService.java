@@ -47,7 +47,7 @@ public class UserService implements UserServiceRemote, UserServiceLocal {
 		em.flush();
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public List<User> findAll() {
 		String jpql="select u from User u";
