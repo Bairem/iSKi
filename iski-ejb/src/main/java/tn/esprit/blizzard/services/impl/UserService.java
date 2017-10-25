@@ -17,15 +17,15 @@ import tn.esprit.blizzard.services.interfaces.UserServiceRemote;
 @Stateless
 public class UserService implements UserServiceRemote, UserServiceLocal {
 
-	
 	@PersistenceContext
 	private EntityManager em;
-    /**
-     * Default constructor. 
-     */
-    public UserService() {
-        
-    }
+
+	/**
+	 * Default constructor.
+	 */
+	public UserService() {
+
+	}
 
 	@Override
 	public User add(User u) {
@@ -47,18 +47,34 @@ public class UserService implements UserServiceRemote, UserServiceLocal {
 		em.flush();
 	}
 
-	
 	@Override
 	public List<User> findAll() {
-		String jpql="select u from User u";
+		String jpql = "select u from User u";
 		Query qry = em.createQuery(jpql, User.class);
 		return qry.getResultList();
 	}
 
-	
 	@Override
 	public User findById(Integer idUser) {
-		return em.find(User.class, idUser);		
+		return em.find(User.class, idUser);
+
+	}
+
+	@Override
+	public User findByEmail(String l) {
+		User user = null;
+		String jpql = "SELECT u FROM User u WHERE u.email = :param1";
+		Query query = em.createQuery(jpql);
+		query.setParameter("param1", l);
+		try {
+			user = (User) query.getSingleResult();
+			System.out.println("User found "+user.getEmail());
+			return user;
+		} catch (Exception e) {
+			System.err.println("User Not found");
+		}
+
+		return null;
 
 	}
 

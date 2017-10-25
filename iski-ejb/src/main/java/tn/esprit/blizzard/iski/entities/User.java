@@ -30,6 +30,7 @@ public class User implements Serializable {
 	private String email;
 	private String number;
 	private String cin;
+	private String password;
 	@OneToMany
 	private List<Event> events;
 	@OneToMany(mappedBy = "user")
@@ -181,10 +182,17 @@ public class User implements Serializable {
 	public void setCin(String cin) {
 		this.cin = cin;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public User(String lastName, String firstName, String birthDate, String gender, String userType, String email,
-			String number, String cin, List<Event> events, List<SkiTrip> skiTrips, List<Company> companies,
-			List<Contract> contract, List<Booking> bookings, List<Reservation> reservations, List<Trade> trades) {
+			String number, String cin, String password) {
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -194,13 +202,32 @@ public class User implements Serializable {
 		this.email = email;
 		this.number = number;
 		this.cin = cin;
-		this.events = events;
-		this.skiTrips = skiTrips;
-		this.companies = companies;
-		this.contract = contract;
-		this.bookings = bookings;
-		this.reservations = reservations;
-		this.trades = trades;
+		this.password = password;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idUser;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (idUser != other.idUser)
+			return false;
+		return true;
+	}
+
+
+	
 
 }
