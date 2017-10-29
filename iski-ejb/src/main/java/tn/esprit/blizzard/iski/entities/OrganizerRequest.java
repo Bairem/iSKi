@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 /**
  * Entity implementation class for Entity: OrganizerRequest
@@ -23,7 +24,8 @@ public class OrganizerRequest implements Serializable {
 	private String date;
 	private String cv;
 	private String status;
-	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.MERGE)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@NotNull
 	private User user;
 
 	private static final long serialVersionUID = 1L;
