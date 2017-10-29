@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * Entity implementation class for Entity: User
@@ -19,7 +20,7 @@ import javax.persistence.OneToMany;
 public class User implements Serializable {
 
 	@Id
-	@Column(name="idUser")
+	@Column(name = "idUser")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idUser;
 	private String lastName;
@@ -31,6 +32,7 @@ public class User implements Serializable {
 	private String number;
 	private String cin;
 	private String password;
+	private String avatar;
 	@OneToMany
 	private List<Event> events;
 	@OneToMany(mappedBy = "user")
@@ -44,9 +46,10 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user")
 	private List<Reservation> reservations;
 	@OneToMany(mappedBy = "user")
-	private List<Trade>trades;
-	
-	
+	private List<Trade> trades;
+	@OneToOne(mappedBy = "user")
+	OrganizerRequest request;
+
 	public List<Trade> getTrades() {
 		return trades;
 	}
@@ -54,6 +57,7 @@ public class User implements Serializable {
 	public void setTrades(List<Trade> trades) {
 		this.trades = trades;
 	}
+
 	public List<Reservation> getReservations() {
 		return reservations;
 	}
@@ -69,8 +73,6 @@ public class User implements Serializable {
 	public void setBookings(List<Booking> bookings) {
 		this.bookings = bookings;
 	}
-
-
 
 	public List<Contract> getContract() {
 		return contract;
@@ -90,7 +92,6 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	
 	public List<Event> getEvents() {
 		return events;
 	}
@@ -182,7 +183,7 @@ public class User implements Serializable {
 	public void setCin(String cin) {
 		this.cin = cin;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -227,7 +228,20 @@ public class User implements Serializable {
 		return true;
 	}
 
+	public String getAvatar() {
+		return avatar;
+	}
 
-	
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public OrganizerRequest getRequest() {
+		return request;
+	}
+
+	public void setRequest(OrganizerRequest request) {
+		this.request = request;
+	}
 
 }
