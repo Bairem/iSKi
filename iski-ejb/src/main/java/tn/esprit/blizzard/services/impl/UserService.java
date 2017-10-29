@@ -44,7 +44,7 @@ public class UserService implements UserServiceRemote, UserServiceLocal {
 	@Override
 	public void remove(Integer idUser) {
 		em.remove(findById(idUser));
-		em.flush();
+		//em.flush();
 	}
 
 	@Override

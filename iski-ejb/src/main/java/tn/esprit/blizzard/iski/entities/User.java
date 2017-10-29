@@ -3,8 +3,10 @@ package tn.esprit.blizzard.iski.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,7 +49,7 @@ public class User implements Serializable {
 	private List<Reservation> reservations;
 	@OneToMany(mappedBy = "user")
 	private List<Trade> trades;
-	@OneToOne(mappedBy = "user")
+	@OneToOne(mappedBy = "user" ,fetch=FetchType.LAZY, cascade =CascadeType.MERGE)
 	OrganizerRequest request;
 
 	public List<Trade> getTrades() {
